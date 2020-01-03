@@ -1,12 +1,12 @@
 <template>
   <div id="app" class="main-continer px-4 flex">
     <Header />
-    <div class="main flex flex-col items-center justify-center">
+    <main class="main flex flex-col items-center justify-center">
       <CardContainer cardType="marketing-data" />
       <h2 class="main__title">Company</h2>
       <CardContainer />
       <CardContainer cardType="company-data" />
-    </div>
+    </main>
     <Footer />
   </div>
 </template>

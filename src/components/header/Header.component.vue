@@ -1,10 +1,10 @@
 <template>
-  <div class="header flex items-center justify-center">
+  <header class="header flex items-center justify-center">
     <div class="flex items-center justify-center flex-col inner-container">
       <h1 class="hedaer__title">{{ title }}</h1>
       <div class="header__summary">{{ summary }}</div>
     </div>
-  </div>
+  </header>
 </template>
 
 <script>
