@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div :class="classObject">
     <!-- <img src="{{iconBadge}}" /> -->
     <div>{{ name }}</div>
     <div>{{ title }}</div>
@@ -12,10 +12,22 @@ export default {
   props: {
     title: String,
     name: String,
-    iconBadge: String
+    iconBadge: String,
+    reverse: Boolean
+  },
+  computed: {
+    classObject: function() {
+      return `${
+        this.reverse ? "flex-col-reverse" : "flex-col"
+      } card flex items-center p-5`;
+    }
   }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped></style>
+<style>
+.card {
+  min-height: 50px;
+}
+</style>

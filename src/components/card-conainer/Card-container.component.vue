@@ -1,7 +1,7 @@
 <template>
-  <div class="card-container" v-if="cards && cards.length">
+  <div :class="classNames" v-if="cards && cards.length">
     <template v-for="card in cards">
-      <Card :key="card.title + card.name" v-bind="card" />
+      <Card :reverse="reverse" :key="card.title + card.name" v-bind="card" />
     </template>
   </div>
   <div v-else>...loading</div>
@@ -22,7 +22,9 @@ export default {
   },
   data() {
     return {
-      cards: []
+      cards: [],
+      classNames: "card-container flex justify-around my-5",
+      reverse: true
     };
   },
   props: {
@@ -34,12 +36,15 @@ export default {
     switch (this.cardType) {
       case "company-data":
         query = COMPANY_QUERY;
+        this.classNames += "";
         break;
       case "marketing-data":
         query = MARKETING_QUERY;
+        this.classNames += " marketing-style rounded-lg -mt-8";
         break;
       default:
         query = MANAGEMENT_QUERY;
+        this.reverse = false;
         break;
     }
     const {
@@ -58,5 +63,16 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped></style>
+<style>
+.card-container {
+  width: 100%;
+  max-width: 70vw;
+  min-width: 500px;
+}
+.marketing-style {
+  background: white;
+  -webkit-box-shadow: -1px 10px 5px -6px rgba(0, 0, 0, 0.32);
+  -moz-box-shadow: -1px 10px 5px -6px rgba(0, 0, 0, 0.32);
+  box-shadow: -1px 10px 5px -6px rgba(0, 0, 0, 0.32);
+}
+</style>

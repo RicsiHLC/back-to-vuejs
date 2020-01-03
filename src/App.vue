@@ -1,9 +1,12 @@
 <template>
-  <div id="app">
+  <div id="app" class="main-continer px-4 flex">
     <Header />
-    <CardContainer cardType="marketing-data" />
-    <CardContainer />
-    <CardContainer cardType="company-data" />
+    <div class="main flex flex-col items-center justify-center">
+      <CardContainer cardType="marketing-data" />
+      <h2 class="main__title">Company</h2>
+      <CardContainer />
+      <CardContainer cardType="company-data" />
+    </div>
     <Footer />
   </div>
 </template>
@@ -23,12 +26,21 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+html {
+  font-size: 14px;
+}
+.main-continer {
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  font-family: theme("body");
+}
+.main {
+  max-width: 55vw;
+  width: 100%;
+}
+.main__title {
+  font-size: 2rem;
+  color:black;
 }
 </style>

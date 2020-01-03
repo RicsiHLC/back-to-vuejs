@@ -24,7 +24,6 @@ export default {
     });
     console.log(company);
     this.headquarters = company.headquarters
-
   }
 };
 </script>
