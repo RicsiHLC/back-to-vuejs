@@ -9,34 +9,51 @@
 
 <script>
 import Card from "../card/Card.component";
-import gql from "graphql-tag";
+import {
+  MANAGEMENT_QUERY,
+  COMPANY_QUERY,
+  MARKETING_QUERY
+} from "./card.queries";
 
 export default {
   name: "CardContainer",
   components: {
     Card
   },
-  apollo: {
-    cards: {
-      query: gql`
-        query {
-          company {
-            ceo
-            cto
-            coo
-            cto_propulsion
-          }
-        }
-      `,
-      update: data =>
-        Object.entries(data.company).reduce((acc, companyData) => {
-          //TODO write the includes part transform string
-          const title = companyData[0];
-          const name = companyData[1];
-          if (title !== "__typename") acc.push({ title, name });
-          return acc;
-        }, [])
+  data() {
+    return {
+      cards: []
+    };
+  },
+  props: {
+    cardType: String
+  },
+  async mounted() {
+    let query;
+
+    switch (this.cardType) {
+      case "company-data":
+        query = COMPANY_QUERY;
+        break;
+      case "marketing-data":
+        query = MARKETING_QUERY;
+        break;
+      default:
+        query = MANAGEMENT_QUERY;
+        break;
     }
+    const {
+      data: { company }
+    } = await this.$apollo.query({
+      query
+    });
+    this.cards = Object.entries(company).reduce((acc, companyData) => {
+      //TODO write the includes part transform string
+      const title = companyData[0];
+      const name = `${companyData[1]}`;
+      if (title !== "__typename") acc.push({ title, name });
+      return acc;
+    }, []);
   }
 };
 </script>

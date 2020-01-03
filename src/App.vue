@@ -1,28 +1,23 @@
 <template>
   <div id="app">
     <Header />
+    <CardContainer cardType="marketing-data" />
     <CardContainer />
+    <CardContainer cardType="company-data" />
+    <Footer />
   </div>
 </template>
 
 <script>
 import Header from "./components/header/Header.component";
 import CardContainer from "./components/card-conainer/Card-container.component";
+import Footer from "./components/footer/Footer.component";
 export default {
   name: "app",
   components: {
     Header,
-    CardContainer
-  },
-  data: function() {
-    return {
-      cardsArr: [
-        {
-          name: "Elon",
-          jobTitle: "CTO"
-        }
-      ]
-    };
+    CardContainer,
+    Footer
   }
 };
 </script>

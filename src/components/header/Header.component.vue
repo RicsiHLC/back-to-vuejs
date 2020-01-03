@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import gql from "graphql-tag";
+import { HEADER_COMPANY_NAME, HEADER_COMPANY_SUMMARY } from "./header.queries";
 export default {
   name: "Header",
   data() {
@@ -23,32 +23,19 @@ export default {
         company: { name }
       }
     } = await this.$apollo.query({
-      query: gql`
-        query {
-          company {
-            name
-          }
-        }
-      `
+      query: HEADER_COMPANY_NAME
     });
-        const {
+    const {
       data: {
         company: { summary }
       }
     } = await this.$apollo.query({
-      query: gql`
-        query {
-          company {
-            summary
-          }
-        }
-      `
+      query: HEADER_COMPANY_SUMMARY
     });
     this.title = name;
     this.summary = summary;
     this.loading = false;
   }
-
 };
 </script>
 
