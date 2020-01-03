@@ -1,7 +1,17 @@
 <template>
   <div :class="classNames" v-if="cards && cards.length">
-    <template v-for="card in cards">
-      <Card :reverse="reverse" :key="card.title + card.name" v-bind="card" />
+    <template v-for="(card, idx) in cards">
+      <span
+        class="separator my-2"
+        v-if="idx === 1 && reverse"
+        :key="card.name + idx"
+      ></span>
+      <Card :hiddenLogo="hiddenLogo" :reverse="reverse" :key="card.title + card.name+idx" v-bind="card" />
+      <span
+        class="separator my-2"
+        v-if="idx === 1 && reverse"
+        :key="card.title + idx"
+      ></span>
     </template>
   </div>
   <div v-else>...loading</div>
@@ -24,7 +34,8 @@ export default {
     return {
       cards: [],
       classNames: "card-container flex justify-around my-5",
-      reverse: true
+      reverse: true,
+      hiddenLogo: false
     };
   },
   props: {
@@ -41,6 +52,7 @@ export default {
       case "marketing-data":
         query = MARKETING_QUERY;
         this.classNames += " marketing-style rounded-lg -mt-8";
+        this.hiddenLogo = true;
         break;
       default:
         query = MANAGEMENT_QUERY;
@@ -54,7 +66,7 @@ export default {
     });
     this.cards = Object.entries(company).reduce((acc, companyData) => {
       //TODO write the includes part transform string
-      const title = companyData[0];
+      const title = `${companyData[0]}`;
       const name = `${companyData[1]}`;
       if (title !== "__typename") acc.push({ title, name });
       return acc;
@@ -74,5 +86,8 @@ export default {
   -webkit-box-shadow: -1px 10px 5px -6px rgba(0, 0, 0, 0.32);
   -moz-box-shadow: -1px 10px 5px -6px rgba(0, 0, 0, 0.32);
   box-shadow: -1px 10px 5px -6px rgba(0, 0, 0, 0.32);
+}
+.separator {
+  border-right: 1px solid #e2e8f0;
 }
 </style>
