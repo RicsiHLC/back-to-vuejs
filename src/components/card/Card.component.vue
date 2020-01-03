@@ -2,7 +2,7 @@
   <div class="card">
     <!-- <img src="{{iconBadge}}" /> -->
     <div>{{ name }}</div>
-    <div>{{ jobTitle }}</div>
+    <div>{{ title }}</div>
   </div>
 </template>
 
@@ -10,7 +10,7 @@
 export default {
   name: "Card",
   props: {
-    jobTitle: String,
+    title: String,
     name: String,
     iconBadge: String
   }

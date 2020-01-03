@@ -1,7 +1,7 @@
 <template>
   <div class="card-container" v-if="cards && cards.length">
     <template v-for="card in cards">
-      <Card :key="card.jobTitle + card.name" v-bind="card" />
+      <Card :key="card.title + card.name" v-bind="card" />
     </template>
   </div>
   <div v-else>...loading</div>
@@ -31,9 +31,9 @@ export default {
       update: data =>
         Object.entries(data.company).reduce((acc, companyData) => {
           //TODO write the includes part transform string
-          const jobTitle = companyData[0];
+          const title = companyData[0];
           const name = companyData[1];
-          if (jobTitle !== "__typename") acc.push({ jobTitle, name });
+          if (title !== "__typename") acc.push({ title, name });
           return acc;
         }, [])
     }

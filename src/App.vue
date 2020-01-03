@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <Header summary="Welcome to Your Vue.js App" name="Space X" />
-    <CardContainer :cards="cardsArr" />
+    <Header />
+    <CardContainer />
   </div>
 </template>
 
@@ -16,10 +16,12 @@ export default {
   },
   data: function() {
     return {
-      cardsArr: [ {
-        name: 'Elon',
-        jobTitle: 'CTO'
-      }] 
+      cardsArr: [
+        {
+          name: "Elon",
+          jobTitle: "CTO"
+        }
+      ]
     };
   }
 };

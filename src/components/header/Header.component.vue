@@ -1,18 +1,54 @@
 <template>
   <div class="header">
     <img alt="Main logo" src="../../assets/logo.png" />
-    <div>{{ name }}</div>
+    <div>{{ title }}</div>
     <div>{{ summary }}</div>
   </div>
 </template>
 
 <script>
+import gql from "graphql-tag";
 export default {
   name: "Header",
-  props: {
-    name: String,
-    summary: String
+  data() {
+    return {
+      title: "",
+      summary: ""
+    };
+  },
+  async mounted() {
+    this.loading = true;
+    const {
+      data: {
+        company: { name }
+      }
+    } = await this.$apollo.query({
+      query: gql`
+        query {
+          company {
+            name
+          }
+        }
+      `
+    });
+        const {
+      data: {
+        company: { summary }
+      }
+    } = await this.$apollo.query({
+      query: gql`
+        query {
+          company {
+            summary
+          }
+        }
+      `
+    });
+    this.title = name;
+    this.summary = summary;
+    this.loading = false;
   }
+
 };
 </script>
 
