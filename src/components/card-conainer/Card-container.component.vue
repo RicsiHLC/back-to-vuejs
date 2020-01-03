@@ -9,15 +9,33 @@
 
 <script>
 import Card from "../card/Card.component";
+import gql from "graphql-tag";
+
 export default {
   name: "CardContainer",
   components: {
     Card
   },
-  props: {
+  apollo: {
     cards: {
-        type: Array,
-        default: (() => [])
+      query: gql`
+        query {
+          company {
+            ceo
+            cto
+            coo
+            cto_propulsion
+          }
+        }
+      `,
+      update: data =>
+        Object.entries(data.company).reduce((acc, companyData) => {
+          //TODO write the includes part transform string
+          const jobTitle = companyData[0];
+          const name = companyData[1];
+          if (jobTitle !== "__typename") acc.push({ jobTitle, name });
+          return acc;
+        }, [])
     }
   }
 };
